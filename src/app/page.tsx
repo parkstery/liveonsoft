@@ -262,6 +262,8 @@ export default function Home() {
               <a href="https://liveonsoft.com" className="text-sm text-[var(--muted)] hover:text-[var(--accent)]">
                 liveonsoft.com
               </a>
+              <span className="text-[var(--muted)]">·</span>
+              <span className="text-sm text-[var(--muted)]">contact email liveonsoft@gmail.com</span>
             </div>
             <p className="text-sm text-[var(--muted)]">
               © {new Date().getFullYear()} Liveonsoft. 지도·GIS 기반 소프트웨어.
