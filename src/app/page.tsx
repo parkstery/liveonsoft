@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProductPreview } from "@/components/ProductPreview";
 
 export default function Home() {
   return (
@@ -101,19 +102,8 @@ export default function Home() {
                 </ul>
               </div>
               <div className="relative">
-                <div className="aspect-[9/16] max-h-[480px] w-full max-w-[280px] rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-2xl mx-auto lg:mx-0">
-                  <div className="flex h-full flex-col items-center justify-center gap-4 p-6 text-center">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/20">
-                      <svg className="h-8 w-8 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                      </svg>
-                    </div>
-                    <span className="font-semibold text-[var(--foreground)]">Ride the World</span>
-                    <span className="text-xs text-[var(--muted)]">Indoor Cycling</span>
-                    <div className="mt-auto h-24 w-full rounded-lg bg-[var(--border)]/50 flex items-center justify-center">
-                      <span className="text-xs text-[var(--muted)]">Map Preview</span>
-                    </div>
-                  </div>
+                <div className="relative aspect-[9/16] max-h-[480px] w-full max-w-[280px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-2xl mx-auto lg:mx-0">
+                  <ProductPreview />
                 </div>
               </div>
             </div>
