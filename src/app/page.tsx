@@ -69,13 +69,22 @@ export default function Home() {
           <Link href="/" className="text-xl font-semibold tracking-tight text-[var(--foreground)]">
             Liveon<span className="text-[var(--accent)]">soft</span>
           </Link>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2">
             <a href="#product" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
               제품
             </a>
             <a href="#features" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
               기능
             </a>
+            <Link href="/about" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
+              소개
+            </Link>
+            <Link href="/guide" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
+              가이드
+            </Link>
+            <Link href="/contact" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
+              문의
+            </Link>
             <a href="#download" className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--background)] transition hover:bg-[var(--accent-dim)]">
               앱 다운로드
             </a>
@@ -272,6 +281,10 @@ export default function Home() {
             <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               시작하기 &amp; 제어
             </h2>
+            <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+              앱 화면별 단계 안내는 <Link href="/guide" className="text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-dim)]">사용자 상세 가이드</Link>에서
+              확인할 수 있습니다. (cycle/docs 기준)
+            </p>
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6">
                 <h3 className="font-semibold text-[var(--foreground)]">경로 설정</h3>
@@ -342,19 +355,36 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="border-t border-[var(--border)] py-12">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-[var(--foreground)]">Liveon<span className="text-[var(--accent)]">soft</span></span>
-              <span className="text-[var(--muted)]">·</span>
-              <a href="https://liveonsoft.com" className="text-sm text-[var(--muted)] hover:text-[var(--accent)]">
-                liveonsoft.com
-              </a>
-              <span className="text-[var(--muted)]">·</span>
-              <span className="text-sm text-[var(--muted)]">contact email liveonsoft@gmail.com</span>
+          <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 sm:px-6">
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-[var(--muted)]">
+              <Link href="/privacy" className="hover:text-[var(--accent)]">
+                개인정보처리방침
+              </Link>
+              <Link href="/disclaimer" className="hover:text-[var(--accent)]">
+                면책조항
+              </Link>
+              <Link href="/licenses" className="hover:text-[var(--accent)]">
+                오픈소스 라이선스
+              </Link>
             </div>
-            <p className="text-sm text-[var(--muted)]">
-              © {new Date().getFullYear()} Liveonsoft. 지도·GIS 기반 소프트웨어.
-            </p>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
+                <span className="font-semibold text-[var(--foreground)]">
+                  Liveon<span className="text-[var(--accent)]">soft</span>
+                </span>
+                <span className="text-[var(--muted)]">·</span>
+                <a href="https://liveonsoft.com" className="hover:text-[var(--accent)]">
+                  liveonsoft.com
+                </a>
+                <span className="text-[var(--muted)]">·</span>
+                <a href="mailto:liveonsoft@gmail.com" className="hover:text-[var(--accent)]">
+                  liveonsoft@gmail.com
+                </a>
+              </div>
+              <p className="text-sm text-[var(--muted)]">
+                © {new Date().getFullYear()} Liveonsoft. 지도·GIS 기반 소프트웨어.
+              </p>
+            </div>
           </div>
         </footer>
       </main>
