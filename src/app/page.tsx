@@ -38,7 +38,8 @@ export default function Home() {
             전 세계를 실내에서 주행하세요
           </h1>
           <p className="mt-6 max-w-xl text-lg text-[var(--muted)]">
-            모바일 최적화 웹 기반 사이클 시뮬레이터. Google Maps와 AI가 만드는 가상 라이딩 경험.
+            모바일 최적화 PWA·웹 GIS. Google Maps·Street View로 몰입감을 주고, OSRM·Nominatim·오픈 고도로
+            경로를 계산하며, 경사 기반 로컬 코칭과 TTS로 라이딩을 안내합니다.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
@@ -71,21 +72,31 @@ export default function Home() {
                   <span className="text-[var(--muted)]">Indoor Cycling</span>
                 </h2>
                 <p className="mt-4 text-[var(--muted)] leading-relaxed">
-                  Fitness Pro Mobile GIS (Cycle Simulator). 장소 검색부터 START/WAYPOINT/END 설정, 실시간 스트리트 뷰
-                  주행, 고도 차트와 AI 코칭까지. 실내 자전거에서 전 세계 코스를 경험하세요.
+                  패키지명 <span className="text-[var(--foreground)]">fitness-pro-mobile-gis</span> — 장소 검색·출발/도착/경유(최대
+                  3)·경로 스왑부터 Street View 연동 주행, 고도 프로필, 코칭·TTS까지 한 흐름으로 제공합니다. 웹(PWA)과
+                  Capacitor 기반 Android 빌드(<span className="font-mono text-xs">com.liveonsoft.cycle</span>)를
+                  지원하며, Vercel에 SPA와 Serverless API로 배포할 수 있습니다.
                 </p>
                 <ul className="mt-6 space-y-2 text-sm text-[var(--muted)]">
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                    Google Maps 기반 경로 및 고도
+                    지도·거리뷰: Google Maps / Street View (roadmap·hybrid, 풀스크린·미니맵·커버리지 레이어)
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                    Double Buffering 스트리트 뷰 (끊김 없는 주행)
+                    경로·검색·고도: OSRM(cycling/foot), Nominatim, Open-Elevation — Google 의존은 지도·Street View로 한정
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                    Gemini AI 실시간 라이딩 코칭
+                    Street View: 더블 버퍼·점진 로딩·prefetch·캐시 우선, 실내 파노 필터 및 커버리지 안내
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                    코칭: 경사→저항 규칙 + phraseManifest + 브라우저 TTS (Gemini 등 외부 LLM 미사용, 무료·오프라인 대응)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                    부가: My Routes(최대 5)·교통 레이어·Dropbox MP3 배경음·코칭/배경음 토글
                   </li>
                 </ul>
               </div>
@@ -117,39 +128,54 @@ export default function Home() {
               개발 보고서 기반 핵심 기능
             </h2>
             <p className="mt-4 max-w-2xl text-[var(--muted)]">
-              하이브리드 경로 탐색, 끊김 없는 스트리트 뷰, AI 코칭, 반응형 UI까지.
+              2026년 3월 개발 완료 보고서 기준—WEB GIS, Street View 시뮬, 로컬 코칭·TTS, PWA·Android까지.
             </p>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  title: "하이브리드 경로 탐색",
-                  desc: "Google Directions API 우선, 실패 시 OSRM으로 안정적 경로 생성.",
+                  title: "OSRM 경로 탐색",
+                  desc: "자전거·도보 프로필로 경로 계산(Vercel Serverless 프록시), 2m 보간·폴리라인·거리·시간 표시.",
                   icon: "🛣️",
                 },
                 {
-                  title: "Double Buffering Street View",
-                  desc: "두 개의 파노라마 인스턴스 교차 렌더링으로 Black-out 없는 부드러운 주행.",
+                  title: "Nominatim 검색",
+                  desc: "장소 검색·역지오코딩, 최근 검색 5건 저장. 결과를 지도 중심·마커에 반영.",
+                  icon: "🔎",
+                },
+                {
+                  title: "Street View 주행 품질",
+                  desc: "더블 버퍼·점진 로딩·400m prefetch, RUNNING 중 불필요한 getPanorama 호출 제거(Phase 설계).",
                   icon: "🔄",
                 },
                 {
-                  title: "AI 사이클링 코치",
-                  desc: "Gemini가 고도·속도 분석 후 맞춤 저항 단계·페달링 전략을 음성·텍스트로 제공.",
-                  icon: "🤖",
-                },
-                {
-                  title: "반응형 UI/UX",
-                  desc: "접이식 패널 구조로 지도 가독성 극대화, 모바일 최적화.",
-                  icon: "📱",
-                },
-                {
-                  title: "지형 정보 강화",
-                  desc: "Elevation Service 고도 차트, 지도 축척바로 거리감·경사도 파악.",
+                  title: "고도 프로필 (Recharts)",
+                  desc: "Open-Elevation로 경로당 샘플링·캐시, AreaChart와 시뮬레이션 위치 ReferenceLine 동기화.",
                   icon: "📊",
                 },
                 {
-                  title: "경로 저장 (My Routes)",
-                  desc: "즐겨찾기로 자주 쓰는 경로 저장 후 즉시 불러오기.",
+                  title: "로컬 AI 코칭 + TTS",
+                  desc: "경사도→저항 밴드·phraseManifest·예측 코칭(21스텝 주기). 브라우저 Speech Synthesis, 외부 LLM 없음.",
+                  icon: "🤖",
+                },
+                {
+                  title: "주행 시뮬레이션",
+                  desc: "10~100km/h, 재생/일시정지/정지, 3-2-1 카운트다운 후 자동 시작, 완주 시 TTS 안내.",
+                  icon: "▶️",
+                },
+                {
+                  title: "반응형 패널",
+                  desc: "접이식 검색·경로·고도·히스토리 패널로 지도 가독성 확보, 풀스크린 대응.",
+                  icon: "📱",
+                },
+                {
+                  title: "My Routes",
+                  desc: "현재 경로 최대 5개를 localStorage에 저장·로드·삭제.",
                   icon: "⭐",
+                },
+                {
+                  title: "PWA · Capacitor · 배포",
+                  desc: "manifest·Service Worker, Android(appId com.liveonsoft.cycle), Vercel 정적 SPA + /api 라우트.",
+                  icon: "🚀",
                 },
               ].map((f) => (
                 <div
@@ -172,17 +198,19 @@ export default function Home() {
             <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               기술 스택
             </h2>
+            <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+              본 페이지는 Next.js로 운영되며, 아래는 제품(Cycle Simulator / Ride the World) 기준 스택입니다.
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {[
-                "React 19",
-                "TypeScript",
-                "Tailwind CSS",
-                "Google Maps JS API",
-                "Places · Directions · Elevation · Street View",
-                "Google Gemini 1.5 Flash",
-                "Recharts",
-                "Lucide-React",
-                "OSRM",
+                "React 18 · TypeScript 5",
+                "Vite 5 · Tailwind CSS 3",
+                "Google Maps JS (지도·Street View)",
+                "OSRM · Nominatim (Vercel API 프록시)",
+                "Open-Elevation",
+                "Recharts · Lucide React",
+                "Capacitor 8 · Android",
+                "PWA (manifest · SW)",
               ].map((tech) => (
                 <span
                   key={tech}
@@ -206,19 +234,22 @@ export default function Home() {
               <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6">
                 <h3 className="font-semibold text-[var(--foreground)]">경로 설정</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">
-                  검색창 또는 지도 클릭으로 목적지·핀 설정. START(A), WAYPOINT, END(B)로 경로 구성 후 Go.
+                  텍스트 검색(Nominatim) 또는 지도 클릭으로 출발/도착·경유(최대 3) 설정, 출발·도착 스왑. OSRM으로
+                  자전거·도보 경로를 계산한 뒤 Go.
                 </p>
               </div>
               <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6">
                 <h3 className="font-semibold text-[var(--foreground)]">시뮬레이션 제어</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">
-                  Play/Pause, 스트리트 뷰 온/오프·전체화면, 슬라이더로 속도 10~100km/h 조절.
+                  재생·일시정지·정지, 속도 10~100km/h. Go 후 3→2→1→Start! 카운트다운, 동일 입력이면 경로 재요청 없이
+                  시뮬만 재시작. Street View 풀스크린·미니맵·교통 레이어 토글.
                 </p>
               </div>
               <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6">
-                <h3 className="font-semibold text-[var(--foreground)]">AI 코칭 &amp; 지형</h3>
+                <h3 className="font-semibold text-[var(--foreground)]">코칭·고도·미디어</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">
-                  고도 변화 시 AI 코치가 라이딩 팁·음성 안내. 고도 차트·축척바로 경사·거리 확인.
+                  경사 기반 로컬 멘트·TTS, 코칭/배경음 on/off. Open-Elevation 기반 고도 차트 커서가 주행 위치와
+                  동기화. 선택 시 Dropbox MP3 플레이리스트 랜덤 재생(페이드 인/아웃).
                 </p>
               </div>
             </div>
@@ -234,10 +265,12 @@ export default function Home() {
               실내에서 전 세계를 달리세요
             </h2>
             <p className="mt-4 text-[var(--muted)]">
-              Android 앱을 다운로드하고 Google Play에서 만나보세요.
+              웹(PWA)으로도 이용할 수 있으며, Android는 Capacitor 빌드 패키지{" "}
+              <span className="font-mono text-[var(--foreground)]">com.liveonsoft.cycle</span> 기준입니다. 스토어
+              공개 시 아래 링크가 활성화됩니다.
             </p>
             <a
-              href="https://play.google.com/store/apps/details?id=com.liveonsoft.ridetheworld"
+              href="https://play.google.com/store/apps/details?id=com.liveonsoft.cycle"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-3 rounded-xl bg-[var(--accent)] px-8 py-4 font-semibold text-[var(--background)] transition hover:bg-[var(--accent-dim)]"
@@ -247,8 +280,9 @@ export default function Home() {
               </svg>
               Google Play에서 다운로드
             </a>
-            <p className="mt-4 text-xs text-[var(--muted)]">
-              앱 ID: com.liveonsoft.ridetheworld (등록 후 링크 업데이트 가능)
+            <p className="mt-4 text-xs text-[var(--muted)] leading-relaxed">
+              실시간 GPS 추적은 미구현이며, 가상 주행(시뮬레이션) 중심입니다. 스토어 식별자가 다르면 링크의{" "}
+              <span className="font-mono">id=</span> 값만 실제 패키지명으로 바꿔 주세요.
             </p>
           </div>
         </section>

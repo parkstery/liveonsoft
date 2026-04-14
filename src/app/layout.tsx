@@ -17,11 +17,22 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Liveonsoft | 지도·GIS 기반 소프트웨어",
   description:
-    "실시간 고도 분석과 AI 코칭이 있는 웹 기반 사이클 시뮬레이터, Ride the World - Indoor Cycling. 모바일 최적화 지도 소프트웨어를 개발합니다.",
-  keywords: ["Liveonsoft", "Ride the World", "Indoor Cycling", "GIS", "지도", "사이클 시뮬레이터"],
+    "Ride the World - Indoor Cycling: OSRM·Nominatim·Open-Elevation 기반 경로·고도, Google Maps·Street View 시각화, 로컬 규칙·TTS AI 코칭. PWA 및 Capacitor Android 지원.",
+  keywords: [
+    "Liveonsoft",
+    "Ride the World",
+    "Indoor Cycling",
+    "GIS",
+    "지도",
+    "사이클 시뮬레이터",
+    "OSRM",
+    "Street View",
+    "PWA",
+  ],
   openGraph: {
     title: "Liveonsoft | 지도·GIS 기반 소프트웨어",
-    description: "Ride the World - Indoor Cycling. 실내에서 전 세계 경로를 가상 주행하세요.",
+    description:
+      "전 세계 코스를 실내에서—오픈 데이터 경로·고도와 Street View, 로컬 AI 코칭(TTS)으로 가상 라이딩.",
     url: "https://liveonsoft.com",
   },
 };
