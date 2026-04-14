@@ -1,5 +1,64 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ProductPreview } from "@/components/ProductPreview";
+
+const CYCLIST_SILHOUETTE = "/brand/cycling-racer-silhouette.png";
+
+type FeatureCard = {
+  title: string;
+  desc: string;
+  icon: string;
+  illustration?: string;
+};
+
+const FEATURE_CARDS: FeatureCard[] = [
+  {
+    title: "OSRM 경로 탐색",
+    desc: "자전거·도보 프로필로 경로 계산(Vercel Serverless 프록시), 2m 보간·폴리라인·거리·시간 표시.",
+    icon: "🛣️",
+  },
+  {
+    title: "Nominatim 검색",
+    desc: "장소 검색·역지오코딩, 최근 검색 5건 저장. 결과를 지도 중심·마커에 반영.",
+    icon: "🔎",
+  },
+  {
+    title: "Street View 주행 품질",
+    desc: "더블 버퍼·점진 로딩·400m prefetch, RUNNING 중 불필요한 getPanorama 호출 제거(Phase 설계).",
+    icon: "🔄",
+  },
+  {
+    title: "고도 프로필 (Recharts)",
+    desc: "Open-Elevation로 경로당 샘플링·캐시, AreaChart와 시뮬레이션 위치 ReferenceLine 동기화.",
+    icon: "📊",
+  },
+  {
+    title: "로컬 AI 코칭 + TTS",
+    desc: "경사도→저항 밴드·phraseManifest·예측 코칭(21스텝 주기). 브라우저 Speech Synthesis, 외부 LLM 없음.",
+    icon: "🤖",
+  },
+  {
+    title: "주행 시뮬레이션",
+    desc: "10~100km/h, 재생/일시정지/정지, 3-2-1 카운트다운 후 자동 시작, 완주 시 TTS 안내.",
+    icon: "▶️",
+    illustration: CYCLIST_SILHOUETTE,
+  },
+  {
+    title: "반응형 패널",
+    desc: "접이식 검색·경로·고도·히스토리 패널로 지도 가독성 확보, 풀스크린 대응.",
+    icon: "📱",
+  },
+  {
+    title: "My Routes",
+    desc: "현재 경로 최대 5개를 localStorage에 저장·로드·삭제.",
+    icon: "⭐",
+  },
+  {
+    title: "PWA · Capacitor · 배포",
+    desc: "manifest·Service Worker, Android(appId com.liveonsoft.cycle), Vercel 정적 SPA + /api 라우트.",
+    icon: "🚀",
+  },
+];
 
 export default function Home() {
   return (
@@ -26,38 +85,59 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-4 pt-24 pb-16 text-center">
+        <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-4 pt-24 pb-16">
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--accent)]/5 via-transparent to-transparent" />
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
-            Map & GIS Software
-          </p>
-          <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-            실시간 고도 분석과
-            <br />
-            <span className="gradient-text">AI 코칭</span>으로
-            <br />
-            전 세계를 실내에서 주행하세요
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-[var(--muted)]">
-            모바일 최적화 PWA·웹 GIS. Google Maps·Street View로 몰입감을 주고, OSRM·Nominatim·오픈 고도로
-            경로를 계산하며, 경사 기반 로컬 코칭과 TTS로 라이딩을 안내합니다.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#download"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 font-medium text-[var(--background)] transition hover:bg-[var(--accent-dim)]"
-            >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <path d="M3 20.5v-17c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v17c0 .83-.67 1.5-1.5 1.5S3 21.33 3 20.5zM20.5 10H8.83l3.09-3.09L10.5 5.5 3 13l7.5 7.5 1.41-1.41L8.83 12H20.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z" />
-              </svg>
-              Android 앱 다운로드
-            </a>
-            <a
-              href="#features"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-6 py-3 font-medium text-[var(--foreground)] transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
-            >
-              기능 보기
-            </a>
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+            <div className="max-w-4xl text-center lg:flex-1 lg:text-left">
+              <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
+                Map & GIS Software
+              </p>
+              <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+                실시간 고도 분석과
+                <br />
+                <span className="gradient-text">AI 코칭</span>으로
+                <br />
+                전 세계를 실내에서 주행하세요
+              </h1>
+              <p className="mx-auto mt-6 max-w-xl text-lg text-[var(--muted)] lg:mx-0">
+                모바일 최적화 PWA·웹 GIS. Google Maps·Street View로 몰입감을 주고, OSRM·Nominatim·오픈 고도로
+                경로를 계산하며, 경사 기반 로컬 코칭과 TTS로 라이딩을 안내합니다.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+                <a
+                  href="#download"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 font-medium text-[var(--background)] transition hover:bg-[var(--accent-dim)]"
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <path d="M3 20.5v-17c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v17c0 .83-.67 1.5-1.5 1.5S3 21.33 3 20.5zM20.5 10H8.83l3.09-3.09L10.5 5.5 3 13l7.5 7.5 1.41-1.41L8.83 12H20.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z" />
+                  </svg>
+                  Android 앱 다운로드
+                </a>
+                <a
+                  href="#features"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-6 py-3 font-medium text-[var(--foreground)] transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
+                >
+                  기능 보기
+                </a>
+              </div>
+            </div>
+            <div className="flex w-full max-w-[320px] shrink-0 justify-center lg:max-w-[360px] lg:justify-end">
+              <figure className="w-full rounded-2xl border border-[var(--border)] bg-white p-5 shadow-[0_24px_70px_-24px_rgba(216,27,96,0.45)]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-white">
+                  <Image
+                    src={CYCLIST_SILHOUETTE}
+                    alt="로드 바이크 에어로 자세의 사이클리스트 실루엣"
+                    fill
+                    className="object-contain object-center p-2"
+                    sizes="(max-width: 1024px) 320px, 360px"
+                    priority
+                  />
+                </div>
+                <figcaption className="mt-3 text-center text-xs text-[var(--muted)]">
+                  실내 로드 트레이닝 · 포지션 마커
+                </figcaption>
+              </figure>
+            </div>
           </div>
         </section>
 
@@ -121,60 +201,32 @@ export default function Home() {
               2026년 3월 개발 완료 보고서 기준—WEB GIS, Street View 시뮬, 로컬 코칭·TTS, PWA·Android까지.
             </p>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  title: "OSRM 경로 탐색",
-                  desc: "자전거·도보 프로필로 경로 계산(Vercel Serverless 프록시), 2m 보간·폴리라인·거리·시간 표시.",
-                  icon: "🛣️",
-                },
-                {
-                  title: "Nominatim 검색",
-                  desc: "장소 검색·역지오코딩, 최근 검색 5건 저장. 결과를 지도 중심·마커에 반영.",
-                  icon: "🔎",
-                },
-                {
-                  title: "Street View 주행 품질",
-                  desc: "더블 버퍼·점진 로딩·400m prefetch, RUNNING 중 불필요한 getPanorama 호출 제거(Phase 설계).",
-                  icon: "🔄",
-                },
-                {
-                  title: "고도 프로필 (Recharts)",
-                  desc: "Open-Elevation로 경로당 샘플링·캐시, AreaChart와 시뮬레이션 위치 ReferenceLine 동기화.",
-                  icon: "📊",
-                },
-                {
-                  title: "로컬 AI 코칭 + TTS",
-                  desc: "경사도→저항 밴드·phraseManifest·예측 코칭(21스텝 주기). 브라우저 Speech Synthesis, 외부 LLM 없음.",
-                  icon: "🤖",
-                },
-                {
-                  title: "주행 시뮬레이션",
-                  desc: "10~100km/h, 재생/일시정지/정지, 3-2-1 카운트다운 후 자동 시작, 완주 시 TTS 안내.",
-                  icon: "▶️",
-                },
-                {
-                  title: "반응형 패널",
-                  desc: "접이식 검색·경로·고도·히스토리 패널로 지도 가독성 확보, 풀스크린 대응.",
-                  icon: "📱",
-                },
-                {
-                  title: "My Routes",
-                  desc: "현재 경로 최대 5개를 localStorage에 저장·로드·삭제.",
-                  icon: "⭐",
-                },
-                {
-                  title: "PWA · Capacitor · 배포",
-                  desc: "manifest·Service Worker, Android(appId com.liveonsoft.cycle), Vercel 정적 SPA + /api 라우트.",
-                  icon: "🚀",
-                },
-              ].map((f) => (
+              {FEATURE_CARDS.map((f) => (
                 <div
                   key={f.title}
                   className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6 transition hover:border-[var(--accent)]/50"
                 >
-                  <span className="text-2xl" aria-hidden>{f.icon}</span>
-                  <h3 className="mt-3 font-semibold text-[var(--foreground)]">{f.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{f.desc}</p>
+                  <div className="flex items-start gap-3">
+                    {f.illustration ? (
+                      <div className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-white">
+                        <Image
+                          src={f.illustration}
+                          alt="주행 시뮬레이션 일러스트"
+                          fill
+                          className="object-contain object-center p-0.5"
+                          sizes="72px"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-2xl leading-none" aria-hidden>
+                        {f.icon}
+                      </span>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-[var(--foreground)]">{f.title}</h3>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{f.desc}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -249,6 +301,17 @@ export default function Home() {
         {/* CTA / Download */}
         <section id="download" className="border-t border-[var(--border)] py-24">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+            <div className="mx-auto mb-6 flex justify-center">
+              <div className="relative h-16 w-24 overflow-hidden rounded-xl border border-[var(--border)] bg-white shadow-[0_16px_40px_-18px_rgba(216,27,96,0.4)]">
+                <Image
+                  src={CYCLIST_SILHOUETTE}
+                  alt="에어로 자세 사이클리스트 장식 이미지"
+                  fill
+                  className="object-contain object-center p-1"
+                  sizes="96px"
+                />
+              </div>
+            </div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Ride the World로
               <br />
