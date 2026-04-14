@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BicyclePassLane } from "@/components/BicyclePassLane";
 import { ProductPreview } from "@/components/ProductPreview";
 
 const CYCLIST_SILHOUETTE = "/brand/cycling-racer-silhouette.png";
@@ -149,6 +150,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <BicyclePassLane />
 
         {/* Product: Ride the World */}
         <section id="product" className="relative border-t border-[var(--border)] py-24">

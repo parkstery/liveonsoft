@@ -122,3 +122,44 @@ body {
 .doc-page a:hover {
   color: var(--accent-dim);
 }
+
+/* 자전거 실루엣: 화면 왼쪽 → 오른쪽 패스 (동영상 느낌의 CSS 루프) */
+@keyframes bicycle-pass-ltr {
+  from {
+    transform: translateX(calc(-100% - 1rem));
+  }
+  to {
+    transform: translateX(calc(100vw + 100% + 1rem));
+  }
+}
+
+.bicycle-pass-lane__track {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.bicycle-pass-lane__rider {
+  position: absolute;
+  top: 50%;
+  margin-top: -2.75rem;
+  width: 9rem;
+  height: 5.5rem;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bicycle-pass-lane__rider {
+    animation: none !important;
+  }
+}
+
+.bicycle-pass-lane__rider--a {
+  animation: bicycle-pass-ltr 26s linear infinite;
+}
+
+.bicycle-pass-lane__rider--b {
+  animation: bicycle-pass-ltr 26s linear infinite;
+  animation-delay: -13s;
+}
