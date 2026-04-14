@@ -4,6 +4,7 @@ import { BicyclePassLane } from "@/components/BicyclePassLane";
 import { ProductPreview } from "@/components/ProductPreview";
 
 const CYCLIST_SILHOUETTE = "/brand/cycling-racer-silhouette.png";
+const APP_BICYCLE_LOGO = "/brand/ride-the-world-bicycle-logo.png";
 
 type FeatureCard = {
   title: string;
@@ -159,11 +160,22 @@ export default function Home() {
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               <div>
                 <span className="text-sm font-medium text-[var(--accent)]">Android App</span>
-                <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                  Ride the World
-                  <br />
-                  <span className="text-[var(--muted)]">Indoor Cycling</span>
-                </h2>
+                <div className="mt-3 flex flex-wrap items-center gap-4">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl shadow-[0_12px_36px_-10px_rgba(34,211,238,0.4)] ring-2 ring-cyan-400/30 md:h-16 md:w-16">
+                    <Image
+                      src={APP_BICYCLE_LOGO}
+                      alt="Ride the World 앱 메인 로고 — 지구본 뒷바퀴 자전거"
+                      fill
+                      className="object-cover object-center"
+                      sizes="64px"
+                    />
+                  </div>
+                  <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                    Ride the World
+                    <br />
+                    <span className="text-[var(--muted)]">Indoor Cycling</span>
+                  </h2>
+                </div>
                 <p className="mt-4 text-[var(--muted)] leading-relaxed">
                   패키지명 <span className="text-[var(--foreground)]">fitness-pro-mobile-gis</span> — 장소 검색·출발/도착/경유(최대
                   3)·경로 스왑부터 Street View 연동 주행, 고도 프로필, 코칭·TTS까지 한 흐름으로 제공합니다. 웹(PWA)과
