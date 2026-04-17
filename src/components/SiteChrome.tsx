@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const NAV = [
   { href: "/", label: "홈" },
+  { href: "/#gallery", label: "스크린샷" },
   { href: "/about", label: "소개" },
   { href: "/guide", label: "가이드" },
   { href: "/contact", label: "문의" },
@@ -18,8 +20,23 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     <div className="bg-grid flex min-h-screen flex-col">
       <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/90 backdrop-blur-md">
         <nav className="mx-auto flex h-14 max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2 sm:h-16 sm:px-6">
-          <Link href="/" className="text-lg font-semibold tracking-tight text-[var(--foreground)]">
-            Liveon<span className="text-[var(--accent)]">soft</span>
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-[var(--foreground)]"
+          >
+            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-lg bg-white/5 ring-1 ring-white/10">
+              <Image
+                src="/brand/liveonsoft_logo.png"
+                alt="Liveonsoft 로고"
+                fill
+                className="object-cover object-center"
+                sizes="36px"
+                priority
+              />
+            </span>
+            <span>
+              Liveon<span className="text-[var(--accent)]">soft</span>
+            </span>
           </Link>
           <div className="flex flex-wrap items-center justify-end gap-x-5 gap-y-1 text-sm">
             {NAV.map((item) => (

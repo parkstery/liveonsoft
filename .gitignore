@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 로컬 원본 캡처·영상·로고(작업용). 배포본은 public/ 에만 커밋합니다.
+/src/*.jpg
+/src/*.jpeg
+/src/*.png
+/src/*.mp4
+/src/*.webp

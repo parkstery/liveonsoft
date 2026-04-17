@@ -1,40 +1,74 @@
-import Image from "next/image";
+"use client";
 
-/** 로드 사이클리스트 실루엣 (마젠타) */
-const CYCLIST_SILHOUETTE = "/brand/cycling-racer-silhouette.png";
-/** 앱 메인 로고 — 파란 배경·지구본 뒷바퀴 (cycle1024) */
-const APP_BICYCLE_LOGO = "/brand/ride-the-world-bicycle-logo.png";
+import { useEffect, useRef } from "react";
 
 /**
- * 화면 전체 너비를 왼쪽→오른쪽으로 지나가는 자전거 루프.
- * 실루엣과 앱 메인 로고를 서로 다른 위상으로 교차 배치합니다.
+ * rtw_bike.mp4 · rider.mp4 — 제작 영상을 좌우 패널로 배치.
+ * prefers-reduced-motion 시 자동 재생을 멈춥니다.
  */
 export function BicyclePassLane() {
+  const a = useRef<HTMLVideoElement>(null);
+  const b = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const vids = [a.current, b.current].filter(Boolean) as HTMLVideoElement[];
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      vids.forEach((v) => {
+        if (mq.matches) {
+          v.pause();
+          v.removeAttribute("autoplay");
+        } else {
+          v.setAttribute("autoplay", "");
+          void v.play().catch(() => {});
+        }
+      });
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   return (
     <section
-      className="relative w-full overflow-hidden border-y border-[var(--border)] bg-[var(--card)]/55 backdrop-blur-[2px]"
+      className="relative w-full overflow-hidden border-y border-[var(--border)] bg-black/80"
       aria-hidden
     >
       <span className="sr-only">
-        장식용 애니메이션: 사이클리스트 실루엣과 Ride the World 로고 자전거가 왼쪽에서 오른쪽으로 번갈아 지나갑니다. CSS
-        애니메이션입니다.
+        장식용 동영상 배너: Ride the World 자전거 클립과 라이더 클립. 동작 줄임 설정 시 재생이 멈출 수 있습니다.
       </span>
-      <div className="bicycle-pass-lane__track h-28 md:h-32">
-        <div className="bicycle-pass-lane__rider bicycle-pass-lane__rider--a">
-          <div className="relative ml-0.5 h-full w-full rounded-lg bg-white/92 p-1 shadow-[0_12px_36px_-12px_rgba(216,27,96,0.55)] ring-1 ring-white/25">
-            <Image
-              src={CYCLIST_SILHOUETTE}
-              alt=""
-              fill
-              className="object-contain object-left"
-              sizes="144px"
-            />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x md:divide-[var(--border)]">
+        <div className="relative aspect-[21/9] min-h-[140px] w-full bg-black md:aspect-auto md:min-h-[160px]">
+          <video
+            ref={a}
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src="/video/rtw_bike.mp4" type="video/mp4" />
+          </video>
+          <span className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/55 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/90">
+            RTW Bike
+          </span>
         </div>
-        <div className="bicycle-pass-lane__rider bicycle-pass-lane__rider--b">
-          <div className="relative ml-0.5 h-full w-full overflow-hidden rounded-xl shadow-[0_14px_40px_-12px_rgba(34,211,238,0.45)] ring-2 ring-cyan-400/35">
-            <Image src={APP_BICYCLE_LOGO} alt="" fill className="object-cover object-center" sizes="144px" />
-          </div>
+        <div className="relative aspect-[21/9] min-h-[140px] w-full bg-black md:aspect-auto md:min-h-[160px]">
+          <video
+            ref={b}
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src="/video/rider.mp4" type="video/mp4" />
+          </video>
+          <span className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/55 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/90">
+            Rider
+          </span>
         </div>
       </div>
     </section>

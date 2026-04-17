@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AppScreenshotGallery } from "@/components/AppScreenshotGallery";
 import { BicyclePassLane } from "@/components/BicyclePassLane";
-import { ProductPreview } from "@/components/ProductPreview";
+import { HeroPromoVideo } from "@/components/HeroPromoVideo";
+import { ProductScreenshotCarousel } from "@/components/ProductScreenshotCarousel";
 
-const CYCLIST_SILHOUETTE = "/brand/cycling-racer-silhouette.png";
-const APP_BICYCLE_LOGO = "/brand/ride-the-world-bicycle-logo.png";
+const LIVEONSOFT_LOGO = "/brand/liveonsoft_logo.png";
+const EARTH_BIKE_LOGO = "/brand/earth_bike.png";
 
 type FeatureCard = {
   title: string;
@@ -43,7 +45,7 @@ const FEATURE_CARDS: FeatureCard[] = [
     title: "주행 시뮬레이션",
     desc: "10~100km/h, 재생/일시정지/정지, 3-2-1 카운트다운 후 자동 시작, 완주 시 TTS 안내.",
     icon: "▶️",
-    illustration: CYCLIST_SILHOUETTE,
+    illustration: EARTH_BIKE_LOGO,
   },
   {
     title: "반응형 패널",
@@ -68,12 +70,30 @@ export default function Home() {
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="text-xl font-semibold tracking-tight text-[var(--foreground)]">
-            Liveon<span className="text-[var(--accent)]">soft</span>
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-[var(--foreground)]"
+          >
+            <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10">
+              <Image
+                src={LIVEONSOFT_LOGO}
+                alt="Liveonsoft"
+                fill
+                className="object-cover object-center"
+                sizes="40px"
+                priority
+              />
+            </span>
+            <span>
+              Liveon<span className="text-[var(--accent)]">soft</span>
+            </span>
           </Link>
           <div className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2">
             <a href="#product" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
               제품
+            </a>
+            <a href="#gallery" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
+              스크린샷
             </a>
             <a href="#features" className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]">
               기능
@@ -132,22 +152,8 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="flex w-full max-w-[320px] shrink-0 justify-center lg:max-w-[360px] lg:justify-end">
-              <figure className="w-full rounded-2xl border border-[var(--border)] bg-white p-5 shadow-[0_24px_70px_-24px_rgba(216,27,96,0.45)]">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-white">
-                  <Image
-                    src={CYCLIST_SILHOUETTE}
-                    alt="로드 바이크 에어로 자세의 사이클리스트 실루엣"
-                    fill
-                    className="object-contain object-center p-2"
-                    sizes="(max-width: 1024px) 320px, 360px"
-                    priority
-                  />
-                </div>
-                <figcaption className="mt-3 text-center text-xs text-[var(--muted)]">
-                  실내 로드 트레이닝 · 포지션 마커
-                </figcaption>
-              </figure>
+            <div className="flex w-full max-w-[min(100%,380px)] shrink-0 justify-center lg:justify-end">
+              <HeroPromoVideo />
             </div>
           </div>
         </section>
@@ -163,11 +169,12 @@ export default function Home() {
                 <div className="mt-3 flex flex-wrap items-center gap-4">
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl shadow-[0_12px_36px_-10px_rgba(34,211,238,0.4)] ring-2 ring-cyan-400/30 md:h-16 md:w-16">
                     <Image
-                      src={APP_BICYCLE_LOGO}
-                      alt="Ride the World 앱 메인 로고 — 지구본 뒷바퀴 자전거"
+                      src={EARTH_BIKE_LOGO}
+                      alt="Ride the World 앱 아이콘 — 지구본 뒷바퀴 자전거"
                       fill
                       className="object-cover object-center"
                       sizes="64px"
+                      unoptimized
                     />
                   </div>
                   <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -206,8 +213,8 @@ export default function Home() {
                 </ul>
               </div>
               <div className="relative">
-                <div className="relative aspect-[9/16] max-h-[480px] w-full max-w-[280px] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-2xl mx-auto lg:mx-0">
-                  <ProductPreview />
+                <div className="mx-auto flex w-full max-w-[320px] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-3 shadow-2xl lg:mx-0 lg:max-w-[360px]">
+                  <ProductScreenshotCarousel />
                 </div>
               </div>
             </div>
@@ -232,13 +239,14 @@ export default function Home() {
                 >
                   <div className="flex items-start gap-3">
                     {f.illustration ? (
-                      <div className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-white">
+                      <div className="relative h-14 w-[4.5rem] shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[#1756a8]">
                         <Image
                           src={f.illustration}
-                          alt="주행 시뮬레이션 일러스트"
+                          alt="Ride the World 앱 아이콘"
                           fill
-                          className="object-contain object-center p-0.5"
+                          className="object-cover object-center"
                           sizes="72px"
+                          unoptimized
                         />
                       </div>
                     ) : (
@@ -256,6 +264,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <AppScreenshotGallery />
 
         {/* Tech Stack */}
         <section className="border-t border-[var(--border)] py-24">
@@ -297,8 +307,12 @@ export default function Home() {
               시작하기 &amp; 제어
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
-              앱 화면별 단계 안내는 <Link href="/guide" className="text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-dim)]">사용자 상세 가이드</Link>에서
-              확인할 수 있습니다. (cycle/docs 기준)
+              앱 화면별 단계 안내는{" "}
+              <Link href="/guide" className="text-[var(--accent)] underline underline-offset-2 hover:text-[var(--accent-dim)]">
+                사용자 상세 가이드
+              </Link>
+              와 <Link href="#gallery" className="text-[var(--accent)] underline underline-offset-2">스크린샷 갤러리</Link>에서
+              확인할 수 있습니다.
             </p>
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6">
@@ -330,13 +344,14 @@ export default function Home() {
         <section id="download" className="border-t border-[var(--border)] py-24">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
             <div className="mx-auto mb-6 flex justify-center">
-              <div className="relative h-16 w-24 overflow-hidden rounded-xl border border-[var(--border)] bg-white shadow-[0_16px_40px_-18px_rgba(216,27,96,0.4)]">
+              <div className="relative h-20 w-20 overflow-hidden rounded-2xl border border-[var(--border)] bg-[#1756a8] shadow-[0_16px_40px_-14px_rgba(34,211,238,0.45)] ring-2 ring-cyan-400/25">
                 <Image
-                  src={CYCLIST_SILHOUETTE}
-                  alt="에어로 자세 사이클리스트 장식 이미지"
+                  src={EARTH_BIKE_LOGO}
+                  alt="Ride the World 앱 아이콘"
                   fill
-                  className="object-contain object-center p-1"
-                  sizes="96px"
+                  className="object-cover object-center"
+                  sizes="80px"
+                  unoptimized
                 />
               </div>
             </div>
