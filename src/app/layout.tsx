@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import icon from "./icon.png";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -15,6 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://liveonsoft.com"),
   title: "Liveonsoft | 지도·GIS 기반 소프트웨어",
   description:
     "Ride the World - Indoor Cycling: OSRM·Nominatim·Open-Elevation 기반 경로·고도, Google Maps·Street View 시각화, 로컬 규칙·TTS AI 코칭. PWA 및 Capacitor Android 지원.",
@@ -29,6 +31,10 @@ export const metadata: Metadata = {
     "Street View",
     "PWA",
   ],
+  icons: {
+    icon: [{ url: icon.src, type: "image/png" }],
+    apple: [{ url: icon.src, type: "image/png", sizes: "180x180" }],
+  },
   openGraph: {
     title: "Liveonsoft | 지도·GIS 기반 소프트웨어",
     description:
