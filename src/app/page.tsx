@@ -121,18 +121,18 @@ export default function Home() {
           <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
             <div className="max-w-4xl text-center lg:flex-1 lg:text-left">
               <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
-                Map & GIS Software
+                거리뷰 기반 실내 라이딩 앱 // by EG
               </p>
               <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-                실시간 고도 분석과
+                경로 고도 분석과
                 <br />
-                <span className="gradient-text">AI 코칭</span>으로
+                <span className="gradient-text">스마트 코칭</span>으로 //by EG
                 <br />
-                전 세계를 실내에서 주행하세요
+                전 세계를 실내에서 주행하세요 //by EG
               </h1>
               <p className="mx-auto mt-6 max-w-xl text-lg text-[var(--muted)] lg:mx-0">
-                모바일 최적화 PWA·웹 GIS. Google Maps·Street View로 몰입감을 주고, OSRM·Nominatim·오픈 고도로
-                경로를 계산하며, 경사 기반 로컬 코칭과 TTS로 라이딩을 안내합니다.
+                모바일 최적화 Google Maps·Street View로 몰입감을 주고, 실제 도로를 기반으로 //by EG
+                경로를 계산하며, 경사 기반 로컬 코칭과 TTS로 라이딩을 안내합니다. //by EG
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                 <a
