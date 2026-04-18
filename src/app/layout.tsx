@@ -32,7 +32,11 @@ export const metadata: Metadata = {
     "PWA",
   ],
   icons: {
-    icon: [{ url: icon.src, type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: icon.src, type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
     apple: [{ url: icon.src, type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
