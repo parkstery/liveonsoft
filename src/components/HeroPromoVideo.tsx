@@ -31,7 +31,7 @@ export function HeroPromoVideo() {
       <div className="relative aspect-[9/16] w-full bg-black">
         <video
           ref={v}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain"
           autoPlay
           muted
           loop

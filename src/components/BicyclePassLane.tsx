@@ -3,26 +3,24 @@
 import { useEffect, useRef } from "react";
 
 /**
- * rtw_bike.mp4 · rider.mp4 — 제작 영상을 좌우 패널로 배치.
- * prefers-reduced-motion 시 자동 재생을 멈춥니다.
+ * rtw_bike.mp4 단일 트랙. object-contain으로 세로·가로 잘림 없이 전체 프레임이 보이도록 배치.
+ * rider.mp4는 히어로(HeroPromoVideo)에서만 재생합니다.
  */
 export function BicyclePassLane() {
-  const a = useRef<HTMLVideoElement>(null);
-  const b = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const vids = [a.current, b.current].filter(Boolean) as HTMLVideoElement[];
+    const el = videoRef.current;
+    if (!el) return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
-      vids.forEach((v) => {
-        if (mq.matches) {
-          v.pause();
-          v.removeAttribute("autoplay");
-        } else {
-          v.setAttribute("autoplay", "");
-          void v.play().catch(() => {});
-        }
-      });
+      if (mq.matches) {
+        el.pause();
+        el.removeAttribute("autoplay");
+      } else {
+        el.setAttribute("autoplay", "");
+        void el.play().catch(() => {});
+      }
     };
     sync();
     mq.addEventListener("change", sync);
@@ -31,45 +29,25 @@ export function BicyclePassLane() {
 
   return (
     <section
-      className="relative w-full overflow-hidden border-y border-[var(--border)] bg-black/80"
+      className="relative w-full overflow-hidden border-y border-[var(--border)] bg-black"
       aria-hidden
     >
       <span className="sr-only">
-        장식용 동영상 배너: Ride the World 자전거 클립과 라이더 클립. 동작 줄임 설정 시 재생이 멈출 수 있습니다.
+        장식용 동영상: Ride the World 자전거 클립(rtw_bike). 동작 줄임 설정 시 재생이 멈출 수 있습니다.
       </span>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x md:divide-[var(--border)]">
-        <div className="relative aspect-[21/9] min-h-[140px] w-full bg-black md:aspect-auto md:min-h-[160px]">
-          <video
-            ref={a}
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          >
-            <source src="/video/rtw_bike.mp4" type="video/mp4" />
-          </video>
-          <span className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/55 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/90">
-            RTW Bike
-          </span>
-        </div>
-        <div className="relative aspect-[21/9] min-h-[140px] w-full bg-black md:aspect-auto md:min-h-[160px]">
-          <video
-            ref={b}
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          >
-            <source src="/video/rider.mp4" type="video/mp4" />
-          </video>
-          <span className="pointer-events-none absolute bottom-2 left-2 rounded bg-black/55 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/90">
-            Rider
-          </span>
-        </div>
+      {/* 가운데 정렬 + letterbox: cover 대신 contain */}
+      <div className="mx-auto flex w-full max-w-6xl justify-center px-2 py-4 sm:px-4 sm:py-6">
+        <video
+          ref={videoRef}
+          className="mx-auto block max-h-[min(70vh,680px)] w-full object-contain [aspect-ratio:auto]"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        >
+          <source src="/video/rtw_bike.mp4" type="video/mp4" />
+        </video>
       </div>
     </section>
   );

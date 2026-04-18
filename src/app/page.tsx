@@ -120,19 +120,20 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--accent)]/5 via-transparent to-transparent" />
           <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
             <div className="max-w-4xl text-center lg:flex-1 lg:text-left">
+              {/* by EG: 히어로 카피 수정 */}
               <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
-                거리뷰 기반 실내 라이딩 앱 // by EG
+                거리뷰 기반 실내 라이딩 앱
               </p>
               <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
                 경로 고도 분석과
                 <br />
-                <span className="gradient-text">스마트 코칭</span>으로 //by EG
+                <span className="gradient-text">스마트 코칭</span>으로
                 <br />
-                전 세계를 실내에서 주행하세요 //by EG
+                전 세계를 실내에서 주행하세요
               </h1>
               <p className="mx-auto mt-6 max-w-xl text-lg text-[var(--muted)] lg:mx-0">
-                모바일 최적화 Google Maps·Street View로 몰입감을 주고, 실제 도로를 기반으로 //by EG
-                경로를 계산하며, 경사 기반 로컬 코칭과 TTS로 라이딩을 안내합니다. //by EG
+                모바일 최적화 Google Maps·Street View로 몰입감을 주고, 실제 도로를 기반으로 경로를 계산하며, 경사 기반
+                로컬 코칭과 TTS로 라이딩을 안내합니다.
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                 <a
