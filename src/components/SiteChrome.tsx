@@ -24,13 +24,13 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             href="/"
             className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-[var(--foreground)]"
           >
-            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-lg bg-white/5 ring-1 ring-white/10">
+            <span className="relative h-11 w-44 shrink-0 overflow-hidden rounded-lg bg-white/5 ring-1 ring-white/10 sm:h-12 sm:w-52">
               <Image
                 src="/brand/liveonsoft_logo.png"
                 alt="Liveonsoft 로고"
                 fill
-                className="object-cover object-center"
-                sizes="36px"
+                className="object-contain object-left"
+                sizes="(max-width:640px) 176px, 208px"
                 priority
               />
             </span>

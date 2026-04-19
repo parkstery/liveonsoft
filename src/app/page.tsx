@@ -74,13 +74,13 @@ export default function Home() {
             href="/"
             className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-[var(--foreground)]"
           >
-            <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10">
+            <span className="relative h-11 w-44 shrink-0 overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10 sm:h-12 sm:w-52">
               <Image
                 src={LIVEONSOFT_LOGO}
                 alt="Liveonsoft"
                 fill
-                className="object-cover object-center"
-                sizes="40px"
+                className="object-contain object-left"
+                sizes="(max-width:640px) 176px, 208px"
                 priority
               />
             </span>
@@ -122,10 +122,10 @@ export default function Home() {
             <div className="max-w-4xl text-center lg:flex-1 lg:text-left">
               {/* by EG: 히어로 카피 수정 */}
               <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
-                거리뷰 기반 실내 라이딩 앱
+                구글 스트피트뷰 기반 실내 라이딩 앱
               </p>
               <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-                경로 고도 분석과
+                경로 표고 분석과
                 <br />
                 <span className="gradient-text">스마트 코칭</span>으로
                 <br />
